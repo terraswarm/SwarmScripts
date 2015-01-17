@@ -6,8 +6,8 @@ echo
 
 # create terraswarm directory in /etc
 mkdir -p /etc/terraswarm
-# grab the python client contact script
-wget -O /etc/terraswarm/client.py https://raw.githubusercontent.com/terraswarm/SwarmScripts/master/client.py
+# grab the python client contact script, with verbose wget
+wget -v -O /etc/terraswarm/client.py https://raw.githubusercontent.com/terraswarm/SwarmScripts/master/client.py
 # only if the file does not exist
 #wget -nc -O /etc/terraswarm/client.py [location]
 
