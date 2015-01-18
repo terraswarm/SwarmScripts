@@ -1,0 +1,2 @@
+# Add startup script
+d-i preseed/late_command	string chroot /target wget -O /etc/init.d/SwarmStart.sh https://raw.githubusercontent.com/terraswarm/SwarmScripts/master/start.sh ; chroot /target chmod +x /etc/init.d/SwarmStart.sh ; chroot /target update-rc.d SwarmStart.sh defaults ;
