@@ -1,4 +1,7 @@
 #!/bin/bash
+# Reference
+# [1] https://pricklytech.wordpress.com/2013/04/21/ubuntu-server-unattended-installation-custom-cd/
+# [2] https://github.com/netson/ubuntu-unattended
 
 # mount the original iso
 wget -nc http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso 
