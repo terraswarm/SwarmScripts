@@ -18,11 +18,11 @@ sudo chmod -R 777 /opt/serveriso
 # edit for an unattended installation
 sudo cp ks.cfg /opt/serveriso
 sudo echo en>/opt/serveriso/isolinux/langlist
-sudo sed -i "s@quite --@ks=cdrom:/ks.cfg@g" /opt/serveriso/isolinux/txt.cfg
+sudo sed -i 's/quiet\ --/ks=cdrom:\/ks.cfg/g' /opt/serveriso/isolinux/txt.cfg
 sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntu-server.seed
 sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntu-server-minimal.seed
 
-# create a new iso
+# create a new iso, which is at /opt/autoinstall.iso
 cd /opt/serveriso
 sudo mkisofs -D -r -V "ATTENDLESS_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o /opt/autoinstall.iso /opt/serveriso
 cd -
