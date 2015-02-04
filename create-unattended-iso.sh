@@ -5,17 +5,17 @@
 
 # mount the original iso
 case "$1" in
-1) 	URL=http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso
+1) 	
+	URL=http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso
 	ISONAME=ubuntu-14.04-server-amd64.iso
-	echo $URL
-	echo $ISONAME
 	;;
-*) 	URL=http://cdimage.ubuntu.com/ubuntustudio/releases/trusty/release/ubuntustudio-14.04.1-dvd-amd64.iso
+*) 	
+	URL=http://cdimage.ubuntu.com/ubuntustudio/releases/trusty/release/ubuntustudio-14.04.1-dvd-amd64.iso
 	ISONAME=ubuntustudio-14.04.1-dvd-amd64.iso
-	echo $URL
-	echo $ISONAME
 	;;
 esac
+echo "URL = $URL"
+echo "ISONAME = $ISONAME"
 wget -nc $URL
 sudo mkdir -p /mnt/iso
 sudo umount /mnt/iso
@@ -30,9 +30,17 @@ sudo chmod -R 777 /opt/serveriso
 # edit for an unattended installation
 sudo cp ks.cfg /opt/serveriso
 sudo echo en>/opt/serveriso/isolinux/langlist
-sudo sed -i 's/quiet\ --/ks=cdrom:\/ks.cfg/g' /opt/serveriso/isolinux/txt.cfg
-sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntu-server.seed
-sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntu-server-minimal.seed
+case "$1" in 
+
+1)	
+	sudo sed -i 's/quiet\ --/ks=cdrom:\/ks.cfg/g' /opt/serveriso/isolinux/txt.cfg
+	sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntu-server.seed
+	;;
+*)	
+	sudo sed -i 's/quiet\ splash\ --/ks=cdrom:\/ks.cfg/g' /opt/serveriso/isolinux/txt.cfg
+	sudo cat extra.preseed >> /opt/serveriso/preseed/ubuntustudio.seed
+	;;
+esac
 
 # create a new iso, which is at /opt/autoinstall.iso
 cd /opt/serveriso
