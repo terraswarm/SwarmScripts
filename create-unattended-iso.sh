@@ -4,10 +4,22 @@
 # [2] https://github.com/netson/ubuntu-unattended
 
 # mount the original iso
-wget -nc http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso 
+case "$1" in
+1) 	URL=http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso
+	ISONAME=ubuntu-14.04-server-amd64.iso
+	echo $URL
+	echo $ISONAME
+	;;
+*) 	URL=http://cdimage.ubuntu.com/ubuntustudio/releases/trusty/release/ubuntustudio-14.04.1-dvd-amd64.iso
+	ISONAME=ubuntustudio-14.04.1-dvd-amd64.iso
+	echo $URL
+	echo $ISONAME
+	;;
+esac
+wget -nc $URL
 sudo mkdir -p /mnt/iso
 sudo umount /mnt/iso
-sudo mount -o loop ubuntu-14.04-server-amd64.iso /mnt/iso
+sudo mount -o loop $ISONAME /mnt/iso
 
 # create a writable copy of the iso
 sudo rm -rf /opt/serveriso
